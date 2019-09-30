@@ -7,6 +7,7 @@ import * as Font from 'expo-font'
 import Main from './screens/Main';
 import Login from './screens/Login';
 import Chat from './screens/Chat';
+import Feed from './screens/Feed';
 
 const AppNavigator = createStackNavigator({
   
@@ -24,7 +25,12 @@ const AppNavigator = createStackNavigator({
   navigationOptions: ({ navigation }) => ({
         header: null,
       }),
-       }, 
+       },
+       FeedScreen: { screen: Feed,
+  navigationOptions: ({ navigation }) => ({
+        header: null,
+      }),
+       } 
 });
 
 const App = createAppContainer(AppNavigator);

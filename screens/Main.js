@@ -13,7 +13,10 @@ export class Main extends Component {
   constructor(props) {
   super(props);
   this.state = {
-  fontLoaded: false
+  fontLoaded: false,
+  txt: ["Hello", "My", "Friend"],
+    tuxt: ["Whats","up","Bussy"],
+    key: [0,1,2]
 }
 }
  async componentDidMount(){
@@ -27,13 +30,19 @@ export class Main extends Component {
     }
 
   state = {
-    isModalVisible: false
+    isModalVisible: false,
   };
 
   toggleModal = () => {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
-
+  renderFeed = () =>{
+    return this.state.txt.map((card) => {
+      return (
+          <Text>{card}</Text>
+        )
+    })
+  }
   render() {
     return (
       <View style={{ flex: 1, width: SCREEN_WIDTH, backgroundColor: 'rgba(0, 162, 255, 1)'}}>
@@ -148,48 +157,7 @@ export class Main extends Component {
         </View>
         <ScrollView style={{ flex: 1, backgroundColor: '#ffffff' }} showsVerticalScrollIndicator={false}>
          <View style={{ flexDirection: 'column', marginTop: 5}}>
-        <TouchableHighlight onPress={this.toggleModal} underlayColor="white">
-<Card
-image={{uri: 'https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg'}}
-containerStyle={{borderRadius:10, marginRight:1, marginLeft:1,}}>
-<View
-    style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}
-  >
-  <View style={{ flexDirection: 'row'}}>
-    <Avatar 
-        size="small"
-        rounded
-        source={{
-    uri:
-      'https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg',
-  }}
-  />
-    </View>
-    <View style={{flexDirection:'row'}}>
- <Avatar
-    rounded
-    icon={{ name:'heart-multiple-outline', type:'material-community'}}
-      overlayContainerStyle={{backgroundColor: '#ff4284',marginLeft:5}}
-        reverse
-   size='small'/>
-   <Avatar
-        reverse
-        rounded
-  icon={{ name:'comment-processing-outline', type:'material-community' }}
-  overlayContainerStyle={{backgroundColor: '#dbdbdb',marginLeft:5}}
-   size='small'/>
-    </View>
-  </View>
-    { this.state.fontLoaded == true ? (
-      <View style={{flexDirection:'row'}}>
-<Text style={{fontFamily: 'MontserratB', color:'#bf00b9', marginTop:10}}>Its_Jess:</Text>
-    <Text style={{fontFamily:'Montserrat', marginTop:10}}> The Photoshoot was so fun! I loved it!</Text>
-  </View>
-            ) : (<Text> Loading...</Text>)
-      }
-          <Text style={{marginTop:4, color:'#878787'}}>View all 48 comments</Text>
-</Card>
-</TouchableHighlight>
+{this.renderFeed()}
 </View>
 <Modal animationIn="zoomInDown" animationOut="zoomOutDown" animationInTiming={700}
           animationOutTiming={600}
