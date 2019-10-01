@@ -100,7 +100,7 @@ export default class Login extends Component {
       });
     }, 1500);
   }else{
-    this.props.navigation.navigate('FeedScreen')
+    this.props.navigation.navigate('MainScreen')
   }
   }
 

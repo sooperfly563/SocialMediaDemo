@@ -14,11 +14,14 @@ export class Main extends Component {
   super(props);
   this.state = {
   fontLoaded: false,
-  txt: ["Hello", "My", "Friend"],
-    tuxt: ["Whats","up","Bussy"],
-    key: [0,1,2]
+  feed: [{
+    username: ["Its_Jess: ", "Haro1d: "],
+    caption: ["The New Photoshoot was so much fun!", "Had a great day at the beach"],
+    coments: ["View All 49 Comments", "View All 19 Comments"],
+  }]
 }
 }
+
  async componentDidMount(){
       await Font.loadAsync({
         'Montserrat': require('../assets/fonts/Montserrat-Regular.ttf'),
@@ -36,13 +39,23 @@ export class Main extends Component {
   toggleModal = () => {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   };
-  renderFeed = () =>{
-    return this.state.txt.map((card) => {
-      return (
-          <Text>{card}</Text>
-        )
+renderFeed = () => {
+    return this.state.feed.map((card, index) => {
+      return card.username.map((username, i) => {
+        if(card.caption[i])
+          return (
+            <Card key={`${i}_${index}`}>
+            <View style={{flexDirection: 'row'}}>
+              <Text>{username}</Text>
+              <Text>{card.caption[i]}</Text>
+              </View>
+              <Text>{card.coments[i]}</Text>
+            </Card>
+          );
+        return <React.Fragment />;
+      });
     })
-  }
+}
   render() {
     return (
       <View style={{ flex: 1, width: SCREEN_WIDTH, backgroundColor: 'rgba(0, 162, 255, 1)'}}>
