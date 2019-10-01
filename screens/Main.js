@@ -4,6 +4,13 @@ import { Input, Button, Icon, Avatar, Card, Tile } from 'react-native-elements';
 import { cacheFonts } from '../helpers/AssetsCaching';
 import Modal from "react-native-modal";
 import * as Font from 'expo-font'
+import Pic1 from '../images/ItsJessPicture.jpg';
+import Pic2 from '../images/AnimalLuverPicture.jpg';
+import Pic3 from '../images/AnimalLuverAvatar.jpg';
+import Pic4 from '../images/Kyl3Rayn3rPicture.jpg';
+import Pic5 from '../images/Kyl3Rayn3rAvatar.jpg';
+import Pic6 from '../images/SmithFamilyPicture.jpg';
+import Pic7 from '../images/SmithFamilyAvatar.jpg';
 
 export const light = '../assets/fonts/Montserrat-Bold.ttf';
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -18,6 +25,7 @@ export class Main extends Component {
     username: ["Its_Jess: ", "Animal_Luver: ", "Kyl3_Rayn3r: ", "Smith_Family: "],
     caption: ["The New Photoshoot was so much fun!", "AWWWW Look at them sleep!!", "Beautiful swim", "This photo is from our vacation <3"],
     coments: ["View All 49 Comments", "View All 19 Comments", "View All 69 Comments", "View All 4 Comments"],
+    photo:[{Pic1},{Pic2},{Pic3}],
   }]
 }
 }
@@ -45,6 +53,7 @@ renderFeed = () => {
         if(card.caption[i])
           return (
             <Card key={`${i}_${index}`}>
+            <Image source={card.photo[i]} />
             <View style={{flexDirection: 'row'}}>
               <Text>{username}</Text>
               <Text>{card.caption[i]}</Text>
