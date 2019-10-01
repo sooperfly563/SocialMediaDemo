@@ -15,9 +15,9 @@ export class Main extends Component {
   this.state = {
   fontLoaded: false,
   feed: [{
-    username: ["Its_Jess: ", "Haro1d: "],
-    caption: ["The New Photoshoot was so much fun!", "Had a great day at the beach"],
-    coments: ["View All 49 Comments", "View All 19 Comments"],
+    username: ["Its_Jess: ", "Animal_Luver: ", "Kyl3_Rayn3r: ", "Smith_Family: "],
+    caption: ["The New Photoshoot was so much fun!", "AWWWW Look at them sleep!!", "Beautiful swim", "This photo is from our vacation <3"],
+    coments: ["View All 49 Comments", "View All 19 Comments", "View All 69 Comments", "View All 4 Comments"],
   }]
 }
 }

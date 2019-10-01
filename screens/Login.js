@@ -23,8 +23,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const IMAGE_SIZE = 80;
 
-const BG_IMAGE = require('../images/bg_screen6.jpg');
-const ICON = require('../images/Icon.png');
+const BG_IMAGE = require('../images/bg_screen2.jpg');
 
 // Enable LayoutAnimation on Android
 UIManager.setLayoutAnimationEnabledExperimental &&
@@ -136,7 +135,7 @@ export default class Login extends Component {
     return (
                  <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 <View style={styles.container}>
-        <View style={styles.bgImage}>
+        <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
           {this.state.fontLoaded ? (
             <View>
               <KeyboardAvoidingView
@@ -306,7 +305,7 @@ export default class Login extends Component {
           ) : (
             <Text>Hold on Plz</Text>
           )}
-        </View>
+        </ImageBackground>
       </View>
                   </TouchableWithoutFeedback>
 
@@ -352,13 +351,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: 50,
     width: 200,
-    shadowColor: "#000",
+    shadowColor: "#ebebeb",
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 0,
     },
     shadowOpacity: 1,
-    shadowRadius: 2,
+    shadowRadius: 10,
   },
   titleContainer: {
     height: 150,
@@ -366,7 +365,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   formContainer: {
-    backgroundColor: 'rgba(69, 140, 255, 0)',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     width: SCREEN_WIDTH - 30,
     borderRadius: 10,
     paddingTop: 32,
@@ -380,7 +379,7 @@ const styles = StyleSheet.create({
   },
   bgImage: {
     flex: 1,
-    backgroundColor: 'rgba(0, 162, 255, 1)',
+    //backgroundColor: 'rgba(0, 162, 255, 1)',
     top: 0,
     left: 0,
     width: SCREEN_WIDTH,
