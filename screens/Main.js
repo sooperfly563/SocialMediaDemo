@@ -25,7 +25,7 @@ export class Main extends Component {
     username: ["Its_Jess: ", "Animal_Luver: ", "Kyl3_Rayn3r: ", "Smith_Family: "],
     caption: ["The New Photoshoot was so much fun!", "AWWWW Look at them sleep!!", "Beautiful swim", "This photo is from our vacation <3"],
     coments: ["View All 49 Comments", "View All 19 Comments", "View All 69 Comments", "View All 4 Comments"],
-    photo:[{Pic1},{Pic2},{Pic3}],
+    photo:[Pic1,Pic2,Pic4,Pic6],
   }]
 }
 }
@@ -52,14 +52,93 @@ renderFeed = () => {
       return card.username.map((username, i) => {
         if(card.caption[i])
           return (
-            <Card key={`${i}_${index}`}>
-            <Image source={card.photo[i]} />
-            <View style={{flexDirection: 'row'}}>
-              <Text>{username}</Text>
-              <Text>{card.caption[i]}</Text>
-              </View>
-              <Text>{card.coments[i]}</Text>
-            </Card>
+            <View>
+            <TouchableHighlight onPress={this.toggleModal} underlayColor="white">
+            <Card
+            key={`${i}_${index}`}
+image={card.photo[i]}
+containerStyle={{borderRadius:10, marginRight:1, marginLeft:1,}}>
+<View
+    style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}
+  >
+  <View style={{ flexDirection: 'row'}}>
+    <Avatar 
+        size="small"
+        rounded
+        source={card.photo[i]}
+  />
+    </View>
+    <View style={{flexDirection:'row'}}>
+ <Avatar
+    rounded
+    icon={{ name:'heart-multiple-outline', type:'material-community', color: '#ff4284'}}
+      overlayContainerStyle={{marginLeft:5}}
+        reverse
+   size='small'/>
+   <Avatar
+        reverse
+        rounded
+  icon={{ name:'comment-processing-outline', type:'material-community' }}
+  overlayContainerStyle={{backgroundColor: '#dbdbdb',marginLeft:5}}
+   size='small'/>
+    </View>
+  </View>
+    { this.state.fontLoaded == true ? (
+      <View style={{flexDirection:'row'}}>
+<Text style={{fontFamily: 'MontserratB', color:'#bf00b9', marginTop:10}}>{username}</Text>
+    <Text style={{fontFamily:'Montserrat', marginTop:10}}>{card.caption[i]}</Text>
+  </View>
+            ) : (<Text> Loading...</Text>)
+      }
+          <Text style={{marginTop:4, color:'#878787'}}>{card.coments[i]}</Text>
+</Card>
+</TouchableHighlight>
+<Modal 
+animationIn="zoomInDown" 
+animationOut="zoomOutDown" 
+animationInTiming={700}
+          animationOutTiming={600}
+          backdropTransitionInTiming={600}
+          backdropTransitionOutTiming={600}
+           isVisible={this.state.isModalVisible}>
+            <Image source={card.photo[i]}
+            style={{width: SCREEN_WIDTH - 20,
+                    height: 300, justifyContent: 'center', alignSelf: 
+                    'center' }}/>
+                    <Card
+containerStyle={{ width: SCREEN_WIDTH - 20, marginTop: 0,  justifyContent: 'center', alignSelf: 
+                    'center' }}>
+<View style={{ flexDirection:'row' }}>
+      <Avatar 
+        size="small"
+        rounded
+        source={card.photo[i]}
+  />
+  <View style={{ flex:2, flexDirection:'row', justifyContent:'flex-end' }}>
+    <Avatar
+    rounded
+    icon={{ name:'heart-multiple-outline', type:'material-community'}}
+      overlayContainerStyle={{backgroundColor: '#ff4284',marginLeft:5}}
+        reverse
+   size='small'/>
+   <Avatar
+        reverse
+        rounded
+  icon={{ name:'comment-processing-outline', type:'material-community' }}
+  overlayContainerStyle={{backgroundColor: '#dbdbdb',marginLeft:5}}
+   size='small'/>
+   </View>
+   </View>
+   <View style={{ flexDirection:'row' }}>
+    <Text style={{fontFamily: 'MontserratB', color:'#bf00b9', marginTop:10}}>{username}</Text>
+    <Text style={{fontFamily:'Montserrat', marginTop:10}}>{card.caption[i]}</Text>
+  </View>
+    <Text style={{marginTop:4, color:'#878787'}}>{card.coments[i]}</Text>
+</Card>
+
+            <Button style={{marginTop:0, borderBottomRightRadius: 20, borderBottomLeftRadius: 20, borderTopLeftRadius: 0, borderTopRightRadius: 0, width: SCREEN_WIDTH - 20, alignSelf: 'center', justifyContent: 'center'}} title="Close" onPress={this.toggleModal} />
+        </Modal>
+        </View>
           );
         return <React.Fragment />;
       });
@@ -226,126 +305,6 @@ containerStyle={{ width: SCREEN_WIDTH - 20, marginTop: 0,  justifyContent: 'cent
 
             <Button style={{marginTop:0, borderBottomRightRadius: 20, borderBottomLeftRadius: 20, borderTopLeftRadius: 0, borderTopRightRadius: 0, width: SCREEN_WIDTH - 20, alignSelf: 'center', justifyContent: 'center'}} title="Close" onPress={this.toggleModal} />
         </Modal>
-<Card
-image={{uri: 'https://phz8.petinsurance.com/-/media/all-phz-images/2016-images-850/dogandcatonbed850.jpg'}}
-containerStyle={{borderRadius:10, marginRight:1, marginLeft:1,}}>
-<View
-    style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}
-  >
-  <View style={{ flexDirection: 'row'}}>
-    <Avatar 
-        size="small"
-        rounded
-        source={{
-    uri:
-      'https://static.scientificamerican.com/sciam/cache/file/D059BC4A-CCF3-4495-849ABBAFAED10456_source.jpg?w=590&h=800&526ED1E1-34FF-4472-B348B8B4769AB2A1',
-  }}
-  />
-    </View>
-    <View style={{flexDirection:'row'}}>
- <Avatar
-    rounded
-    icon={{ name:'heart-multiple-outline', type:'material-community', color: '#ff4284'}}
-      overlayContainerStyle={{marginLeft:5}}
-        reverse
-   size='small'/>
-   <Avatar
-        reverse
-        rounded
-  icon={{ name:'comment-processing-outline', type:'material-community' }}
-  overlayContainerStyle={{backgroundColor: '#dbdbdb',marginLeft:5}}
-   size='small'/>
-    </View>
-  </View>
-    { this.state.fontLoaded == true ? (
-      <View style={{flexDirection:'row'}}>
-<Text style={{fontFamily: 'MontserratB', color:'#bf00b9', marginTop:10}}>Animal_Luver:</Text>
-    <Text style={{fontFamily:'Montserrat', marginTop:10}}> AWW! Look at them sleep!!</Text>
-  </View>
-            ) : (<Text> Loading...</Text>)
-      }
-          <Text style={{marginTop:4, color:'#878787'}}>View all 69 comments</Text>
-</Card>
-<Card
-image={{uri: 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' }}
-containerStyle={{borderRadius:10, marginRight:1, marginLeft:1,}}>
-<View
-    style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}
-  >
-  <View style={{ flexDirection: 'row'}}>
-    <Avatar 
-        size="small"
-        rounded
-        source={{
-    uri:
-      'https://i1.wp.com/digital-photography-school.com/wp-content/uploads/2016/12/Lens-1.jpg?fit=717%2C478&ssl=1',
-  }}
-  />
-    </View>
-    <View style={{flexDirection:'row'}}>
- <Avatar
-    rounded
-    icon={{ name:'heart-multiple-outline', type:'material-community', color: '#ff4284'}}
-      overlayContainerStyle={{marginLeft:5}}
-        reverse
-   size='small'/>
-   <Avatar
-        reverse
-        rounded
-  icon={{ name:'comment-processing-outline', type:'material-community' }}
-  overlayContainerStyle={{backgroundColor: '#dbdbdb',marginLeft:5}}
-   size='small'/>
-    </View>
-  </View>
-    { this.state.fontLoaded == true ? (
-      <View style={{flexDirection:'row'}}>
-<Text style={{fontFamily: 'MontserratB', color:'#bf00b9', marginTop:10}}>Kyl3_Rayn3r:</Text>
-    <Text style={{fontFamily:'Montserrat', marginTop:10}}> Look at the scenery</Text>
-  </View>
-            ) : (<Text> Loading...</Text>)
-      }
-          <Text style={{marginTop:4, color:'#878787'}}>View all 23 comments</Text>
-</Card>
-<Card
-image={{uri: 'https://st2.depositphotos.com/2234518/5181/i/450/depositphotos_51818167-stock-photo-family-portrait-with-thumbs-up.jpg' }}
-containerStyle={{borderRadius:10, marginRight:1, marginLeft:1,}}>
-<View
-    style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}
-  >
-  <View style={{ flexDirection: 'row'}}>
-    <Avatar 
-        size="small"
-        rounded
-        source={{
-    uri:
-      'https://previews.123rf.com/images/piksel/piksel1505/piksel150500114/40349573-happy-family-at-home.jpg',
-  }}
-  />
-    </View>
-    <View style={{flexDirection:'row'}}>
- <Avatar
-    rounded
-    icon={{ name:'heart-multiple-outline', type:'material-community', color: '#ff4284'}}
-      overlayContainerStyle={{marginLeft:5}}
-        reverse
-   size='small'/>
-   <Avatar
-        reverse
-        rounded
-  icon={{ name:'comment-processing-outline', type:'material-community' }}
-  overlayContainerStyle={{backgroundColor: '#dbdbdb',marginLeft:5}}
-   size='small'/>
-    </View>
-  </View>
-    { this.state.fontLoaded == true ? (
-      <View style={{flexDirection:'row'}}>
-<Text style={{fontFamily: 'MontserratB', color:'#bf00b9', marginTop:10}}>Smit_Family:</Text>
-    <Text style={{fontFamily:'Montserrat', marginTop:10}}> This photo is from our vacation</Text>
-  </View>
-            ) : (<Text> Loading...</Text>)
-      }
-          <Text style={{marginTop:4, color:'#878787'}}>View all 3 comments</Text>
-</Card>
         </ScrollView>
         <View style={{backgroundColor: 'rgba(0,0,0,0)',alignSelf:'center', justifyContent:'center'}}>
         <Avatar
