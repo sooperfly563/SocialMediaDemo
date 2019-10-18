@@ -106,6 +106,7 @@ export default class Login extends Component {
   signUp() {
     const { email, password, passwordConfirmation } = this.state;
     this.setState({ isLoading: true });
+        if(email == '' || password == '' || passwordConfirmation == ''){
     // Simulate an API call
     setTimeout(() => {
       LayoutAnimation.easeInEaseOut();
@@ -117,6 +118,9 @@ export default class Login extends Component {
           password === passwordConfirmation || this.confirmationInput.shake(),
       });
     }, 1500);
+    }else{
+    this.props.navigation.navigate('MainScreen')
+  }
   }
 
   render() {
@@ -135,7 +139,7 @@ export default class Login extends Component {
     return (
                  <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 <View style={styles.container}>
-        <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
+        <View style={styles.bgImage}>
           {this.state.fontLoaded ? (
             <View>
               <KeyboardAvoidingView
@@ -305,10 +309,9 @@ export default class Login extends Component {
           ) : (
             <Text>Hold on Plz</Text>
           )}
-        </ImageBackground>
+        </View>
       </View>
                   </TouchableWithoutFeedback>
-
     );
   }
 }
@@ -379,7 +382,7 @@ const styles = StyleSheet.create({
   },
   bgImage: {
     flex: 1,
-    //backgroundColor: 'rgba(0, 162, 255, 1)',
+    backgroundColor: 'rgba(0, 162, 255, 1)',
     top: 0,
     left: 0,
     width: SCREEN_WIDTH,

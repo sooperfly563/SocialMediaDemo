@@ -3,37 +3,20 @@ import { View, Text, ScrollView, Dimensions, Image, TouchableHighlight, SafeArea
  } from 'react-native';
 import { Input, Button, Icon, Avatar, Card, Tile } from 'react-native-elements';
 import { cacheFonts } from '../helpers/AssetsCaching';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import Pic from '../images/ItsJessPicture.jpg';
+
 import * as Font from 'expo-font'
 
-
-import { StreamChat } from "stream-chat";
-import {
-  Chat,
-  Channel,
-  MessageList,
-  MessageInput,
-} from "stream-chat-expo";
-
-const chatClient = new StreamChat('f8wwud5et5jd');
-const userToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoibGl2ZWx5LXRydXRoLTYifQ.RXtlpiT6xy4MnTbFRkXW_mwLUmEJXtkCyM5ibogZlUo';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-const user = {
-  id: 'lively-truth-6',
-  name: 'Lively truth',
-  image:
-    'https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-9/10385550_10153056539665820_6068805647158348556_n.jpg?_nc_cat=105&_nc_oc=AQkrs_udI1fuIc5eK1aTXWAurAnhJLCWEjZ4BqiJB8fQJMUcsjV_JzFhTDN5cXLZIph0WzH6sy4-wSrdV-KZOcJf&_nc_ht=scontent-lax3-1.xx&oh=8bc43d84cceb5716ce8e10286e9368e3&oe=5DDAE40E',
-};
-
-chatClient.setUser(user, userToken);
-
-class ChannelScreen extends React.Component {
+export default class ChannelScreen extends React.Component {
     constructor(props) {
   super(props);
   this.state = {
-  fontLoaded: false
+  fontLoaded: false,
 }
 }
  async componentDidMount(){
@@ -46,36 +29,33 @@ class ChannelScreen extends React.Component {
 
     }
   render() {
-    const channel = chatClient.channel("messaging", "lively-truth-6");
-    channel.watch();
-
+    const { navigation } = this.props.navigation;
     return (
-      <View style={{ flexDirection: 'column', marginTop:-30,}}>
-       <View style={{flexDirection: 'column', marginTop: 20, padding: 5, borderRadius: 10, backgroundColor: 'rgba(0, 162, 255, 1)', shadowOpacity: 0.6,
+      <View style={{ flexDirection: 'column', marginTop:-30, justifyContent:'space-between', flex:1}}>
+       <View style={{flexDirection: 'column', marginTop: 26, padding: 5, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, backgroundColor: 'rgba(0, 162, 255, 1)', shadowOpacity: 0.6,
     shadowRadius: 6,shadowOffset: { width: 0, height: 2 },
     shadowColor: '#007ecc'}}>
         <View
     style={{ flexDirection: 'row', backgroundColor: 'rgba(0, 162, 255, 1)', borderBottomRadius: 10, marginTop:25, }}
   >
-        <Icon containerStyle={{ marginTop: -5 }}
+        <Icon
         reverse
   name='arrow-back'
   type='material'
   color='#517fa4'
-   size= {17}/>
+   size= {17}
+   onPress= {() => this.props.navigation.goBack()}
+   />
       </View>
   <Avatar 
         size="medium"
-        containerStyle={{ alignSelf: 'center', position: 'absolute', justifyContent: 'center', marginTop:28 }}
+        containerStyle={{ alignSelf: 'center', position: 'absolute', justifyContent: 'center', marginTop:33 }}
         rounded
-        source={{
-    uri:
-      'https://i.ytimg.com/vi/58R-WRSV_A0/maxresdefault.jpg',
-  }}
+        source={this.props.navigation.state.params.avatarPicture}
   />
       </View>
       <KeyboardAvoidingView behavior= 'position'>
-    <View style={{ marginTop:-146}}>
+    <View style={{marginBottom:2}}>
       <Input
         containerStyle={{
           backgroundColor: 'white'
@@ -86,7 +66,7 @@ class ChannelScreen extends React.Component {
             reverse
             name='add'
             type='material'
-            size={14}
+            size={17}
             color='#009dff'
             containerStyle={{marginLeft:-20}}
           />
@@ -104,11 +84,5 @@ class ChannelScreen extends React.Component {
   </KeyboardAvoidingView>
 </View>
     );
-  }
-}
-
-export default class App extends React.Component {
-  render() {
-    return <ChannelScreen />;
   }
 }
