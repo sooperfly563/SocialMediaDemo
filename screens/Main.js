@@ -42,7 +42,7 @@ export class Main extends Component {
     coments: ["View All 49 Comments", "View All 19 Comments", "View All 69 Comments", "View All 4 Comments"],
     photo:[Pic1,Pic2,Pic4,Pic6],
     avatar:[Pic1,Ava1,Ava2,Ava3]
-  }],
+  }], //Typicaly it is a good idea to create a spearate file and store all this data...but I won't be displaying or importing too much so it should be fine.
   chat:[{
     convo:[Chat1,Chat2,Pic1,Chat4,Chat5,Chat6],
   }]
@@ -57,7 +57,7 @@ deAnimatedTransition = Animated.spring(this.animation,{toValue:2})
 animatedButton = Animated.spring(this.buttonAnimation,{toValue: 1})
 animateButtonBack = Animated.spring(this.buttonAnimation,{toValue: 2})
 
- async componentDidMount(){
+ async componentDidMount(){ //Load the font
       await Font.loadAsync({
         'Montserrat': require('../assets/fonts/Montserrat-Regular.ttf'),
         'MontserratB': require('../assets/fonts/Montserrat-Bold.ttf'),
@@ -142,7 +142,7 @@ renderFeed = () => {
         if(card.caption[i])
           return (
             <View key={`${i}_${index}`}>
-                { this.state.fontLoaded == true ? (
+                { this.state.fontLoaded == true ? ( //check to see if the font is loaded
             <TouchableHighlight //If A Card id pressed, a Modal will open will all the info
             onPress={()=>this.toggleModal({photo:card.photo[i], avatar:card.avatar[i] ,caption:card.caption[i],username:card.username[i],coments:card.coments[i]})}
             underlayColor="white">
@@ -200,7 +200,7 @@ containerStyle={{borderRadius:10, marginRight:1, marginLeft:1,}}>
           <Text style={{marginTop:4, color:'#878787'}} key={card.coments}>{card.coments[i]}</Text>
 </Card>
 </TouchableHighlight>
-) : (<Text>You will never see this hahaha</Text>)
+) : (<Text>Loading...</Text>) //if the font isn't loaded 
       }
         </View>
           );
